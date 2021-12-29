@@ -7,9 +7,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            app:subtitle="Main screen"
+            app:subtitleTextColor="@color/white"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="@string/app_name"
+            app:titleTextColor="@color/white"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_toolbar_menu"
+        android:layout_marginTop="50dp"
         android:text="Toolbar menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
