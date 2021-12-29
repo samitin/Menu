@@ -1,5 +1,6 @@
 package ru.samitin.menu;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -7,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -14,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
@@ -25,6 +28,7 @@ public class ToolBarMenuFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_toolbar_menu, container, false);
         setHasOptionsMenu(true);
         setActionBar();
+        initPopupMenu(v);
         return v;
     }
     private void setActionBar() {
@@ -33,6 +37,31 @@ public class ToolBarMenuFragment extends Fragment {
         if (actionBar != null) {
             actionBar.setSubtitle("Coat of arms");
         }
+    }
+    private void initPopupMenu(View view) {
+        Button btn = view.findViewById(R.id.button_click);
+        //Можно повесить и обычный слушатель
+        btn.setOnLongClickListener(v -> {
+            Activity activity = requireActivity();
+            PopupMenu popupMenu = new PopupMenu(activity, v);
+            activity.getMenuInflater().inflate(R.menu.popup, popupMenu.getMenu());
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.action_popup_clear:
+                            btn.setVisibility(View.GONE);
+                            return true;
+                        case R.id.action_popup_exit:
+                            activity.finish();
+                            return true;
+                    }
+                    return true;
+                }
+            });
+            popupMenu.show();
+            return true;
+        });
     }
 
 

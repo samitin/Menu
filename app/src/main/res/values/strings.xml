@@ -3,4 +3,7 @@
     <string name="about">About</string>
     <string name="exit">Exit</string>
     <string name="about_developers">О разработчиках</string>
+    <string name="drawer_header">header</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
 </resources>
